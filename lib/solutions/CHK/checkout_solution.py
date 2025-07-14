@@ -30,9 +30,6 @@ class CheckoutSolution:
 
         total = 0
         for item, count in item_count.items():
-            if count <= 0:
-                continue
-
             if item in offers:
                 offer_qty, offer_price = offers[item]
                 special_sets = count // offer_qty
@@ -43,5 +40,6 @@ class CheckoutSolution:
                 total += count * prices[item]
 
         return total
+
 
 
