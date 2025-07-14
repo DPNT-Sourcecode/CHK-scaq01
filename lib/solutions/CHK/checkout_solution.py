@@ -32,7 +32,7 @@ class CheckoutSolution:
             'Z' : 50
         }
 
-        multi_offers = {
+        offers = {
             'A':[(5,200), (3,130)],
             'B':[(2,45)],
             'H':[(10,80), (5,45)],
@@ -42,9 +42,15 @@ class CheckoutSolution:
             'V':[(3,130), (2,90)],
         }
 
-        same_ch_free = {
+        same_sku_free = {
             'F':2,
             'U':3
+        }
+
+        cross_sku_free = {
+            'E': (2, 'B'),
+            'N': (3, 'M'),
+            'R': (3,'Q')
         }
 
         item_count = {}
@@ -53,17 +59,22 @@ class CheckoutSolution:
                 return -1
             item_count[ch] = item_count.get(ch, 0) + 1
 
-        if 'E' in item_count:
-            free_b_from_e = (item_count['E'] // 2)
-            if free_b_from_e > 0:
-                current_b = item_count.get('B',0)
-                item_count['B'] = max(0, current_b - free_b_from_e)
+
+        for sku, (qty_needed, free_sku) in cross_sku_free.items():
+            if sku in item_count:
+                num_free = item_count[sku] // qty_needed
+                if num_free > 0:
+                    current_free_sku_count = item_count.get(free_sku, 0)
+                    item_count[free_sku] = max(0, current_free_sku_count - num_free)
 
         total = 0
         for item, count in item_count.items():
-            if item == 'F':
-                payable_f = count - (count // 3)
-                total += payable_f * prices['F']
+            if item in same_sku_free:
+                group_size = same_sku_free[item] + 1
+                num_groups = count // group_size
+                remaining = count % group_size
+                paid_units = num_groups * same_sku_free[item] + remaining
+                total += paid_units + prices[item]
             elif item in offers:
                 for offer_qty, offer_price in offers[item]:
                     special_sets = count // offer_qty
@@ -74,3 +85,4 @@ class CheckoutSolution:
                 total += count * prices[item]
 
         return total
+
