@@ -32,7 +32,7 @@ from runner.user_input_action import get_user_input
     +------+-----------------------------------------------------------------------+
     |  1.  | Run this file.                                                        |
     |  2.  | Start a challenge by typing "start".                                  |
-    |  3.  | Read tdehe description from the "challenges" folder.                    |
+    |  3.  | Read the description from the "challenges" folder.                    |
     |  4.  | Locate the file corresponding to your current challenge in:           |
     |      |   ./lib/solutions                                                     |
     |  5.  | Replace the following placeholder exception with your solution:       |
@@ -79,3 +79,4 @@ ChallengeSession\
     .with_config(Utils.get_config())\
     .with_action_provider(lambda: get_user_input(sys.argv[1:]))\
     .start()
+

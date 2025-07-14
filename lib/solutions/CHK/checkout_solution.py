@@ -73,10 +73,8 @@ class CheckoutSolution:
         total = 0
         for item, count in item_count.items():
             if item in same_sku_free:
-                group_size = same_sku_free[item]
-                num_groups = count // group_size
-                remaining = count % group_size
-                paid_units = num_groups * same_sku_free[item] + remaining
+                free_items = count // (same_sku_free[item] + 1)
+                paid_units = num_groups - free_items
                 total += paid_units + prices[item]
             elif item in offers:
                 for offer_qty, offer_price in offers[item]:
@@ -88,5 +86,6 @@ class CheckoutSolution:
                 total += count * prices[item]
 
         return total
+
 
 
