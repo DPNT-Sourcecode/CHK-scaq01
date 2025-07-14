@@ -13,7 +13,7 @@ class CheckoutSolution:
 
         offers = {
             'A':[(5,200), (3,130)],
-            'B':(2,45)
+            'B':[(2,45)]
         }
 
         item_count = {}
@@ -30,7 +30,11 @@ class CheckoutSolution:
 
         total = 0
         for item, count in item_count.items():
+            if count > 0:
+                continue
+
             if item in offers:
+                remainin
                 offer_qty, offer_price = offers[item]
                 special_sets = count // offer_qty
                 remaining = count % offer_qty
@@ -40,6 +44,7 @@ class CheckoutSolution:
                 total += count * prices[item]
 
         return total
+
 
 
 
