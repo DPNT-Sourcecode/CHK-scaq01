@@ -31,12 +31,14 @@ class CheckoutSolution:
         total = 0
         for item, count in item_count.items():
             if item in offers:
-                offer_qty, offer_price = offers[item]
-                special_sets = count // offer_qty
-                remaining = count % offer_qty
+                for offer_qty, offer_price in offers[item]:
+                    special_sets = count // offer_qty
+                    count -= special_sets * offer_qty
+                    total += offer_price * special_sets
 
                 total += special_sets * offer_price + remaining * prices[item]
             else:
                 total += count * prices[item]
 
         return total
+
