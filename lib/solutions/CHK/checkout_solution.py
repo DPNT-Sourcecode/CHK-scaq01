@@ -30,7 +30,10 @@ class CheckoutSolution:
 
         total = 0
         for item, count in item_count.items():
-            if item in offers:
+            if item == 'F':
+                payable_f = count - (count // 3)
+                total += payable_f * prices['F']
+            elif item in offers:
                 for offer_qty, offer_price in offers[item]:
                     special_sets = count // offer_qty
                     count -= special_sets * offer_qty
@@ -39,3 +42,4 @@ class CheckoutSolution:
                 total += count * prices[item]
 
         return total
+
