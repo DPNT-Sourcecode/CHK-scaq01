@@ -76,17 +76,15 @@ class CheckoutSolution:
                 free_items = count // (same_sku_free[item] + 1)
                 paid_units = count - free_items
                 total += paid_units + prices[item]
+                continue
             elif item in offers:
                 for offer_qty, offer_price in offers[item]:
                     special_sets = count // offer_qty
                     count -= special_sets * offer_qty
                     total += offer_price * special_sets
                 total += count*prices[item]
+                continue
             else:
                 total += count * prices[item]
 
         return total
-
-
-
-
