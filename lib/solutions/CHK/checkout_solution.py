@@ -53,6 +53,9 @@ class CheckoutSolution:
             'R': (3,'Q')
         }
 
+        if skus == "":
+            return 0
+
         item_count = {}
         for ch in skus:
             if ch not in prices:
@@ -70,7 +73,7 @@ class CheckoutSolution:
         total = 0
         for item, count in item_count.items():
             if item in same_sku_free:
-                group_size = same_sku_free[item] + 1
+                group_size = same_sku_free[item]
                 num_groups = count // group_size
                 remaining = count % group_size
                 paid_units = num_groups * same_sku_free[item] + remaining
@@ -85,4 +88,5 @@ class CheckoutSolution:
                 total += count * prices[item]
 
         return total
+
 
