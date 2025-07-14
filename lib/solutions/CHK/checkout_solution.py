@@ -11,17 +11,28 @@ class CheckoutSolution:
         }
 
         offers = {
-            'A':(3,130)
+            'A':(3,130),
             'B':(2,45)
         }
 
-        if skus == "":
-            return 0
-
+        item_count = {}
         for ch in skus:
             if ch not in prices:
                 return -1
+            item_count[ch] = item_count.get(ch, 0) + 1
 
-        from collections 
+        total = 0
+        for item, count in item_count.items():
+            if item in offers:
+                offer_qty, offer_price = offers[item]
+                special_sets = count // offer_qty
+                remaining = count % offer_qty
+
+                total += special_sets * offer_price + remaining * prices[item]
+            else:
+                total += count * prices[item]
+
+        return total
+
 
 
