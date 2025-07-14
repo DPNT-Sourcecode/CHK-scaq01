@@ -8,18 +8,23 @@ class CheckoutSolution:
             'B' : 30,
             'C' : 20,
             'D' : 15,
+            'E' : 40
         }
 
         offers = {
-            'A':(3,130),
+            'A':[(5,200), (3,130)],
             'B':(2,45)
         }
 
         item_count = {}
         for ch in skus:
-            if ch not in prices:
+            if ch not in priceds:
                 return -1
             item_count[ch] = item_count.get(ch, 0) + 1
+
+        if 'E' in item_count:
+
+
 
         total = 0
         for item, count in item_count.items():
@@ -33,3 +38,4 @@ class CheckoutSolution:
                 total += count * prices[item]
 
         return total
+
