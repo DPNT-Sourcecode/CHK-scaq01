@@ -8,7 +8,8 @@ class CheckoutSolution:
             'B' : 30,
             'C' : 20,
             'D' : 15,
-            'E' : 40
+            'E' : 40,
+            'F' : 10
         }
 
         offers = {
@@ -42,4 +43,5 @@ class CheckoutSolution:
                 total += count * prices[item]
 
         return total
+
 
