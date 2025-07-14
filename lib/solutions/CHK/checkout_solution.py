@@ -18,16 +18,21 @@ class CheckoutSolution:
 
         item_count = {}
         for ch in skus:
-            if ch not in priceds:
+            if ch not in prices:
                 return -1
             item_count[ch] = item_count.get(ch, 0) + 1
 
         if 'E' in item_count:
-
-
+            free_b_from_e = (item_count['E'] // 2)
+            if free_b_from_e > 0:
+                current_b = item_count.get('B',0)
+                item_count['B'] = max(0, current_b - free_b_from_e)
 
         total = 0
         for item, count in item_count.items():
+            if count <= 0:
+                continue
+
             if item in offers:
                 offer_qty, offer_price = offers[item]
                 special_sets = count // offer_qty
@@ -38,4 +43,5 @@ class CheckoutSolution:
                 total += count * prices[item]
 
         return total
+
 
