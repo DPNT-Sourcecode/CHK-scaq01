@@ -39,11 +39,12 @@ class CheckoutSolution:
                     special_sets = count // offer_qty
                     count -= special_sets * offer_qty
                     total += offer_price * special_sets
-                total += count*[prices[item]]
+                total += count*prices[item]
             else:
                 total += count * prices[item]
 
         return total
+
 
 
 
