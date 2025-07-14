@@ -40,8 +40,3 @@ class CheckoutSolution:
                 total += count * prices[item]
 
         return total
-
-
-
-
-
